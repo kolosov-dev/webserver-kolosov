@@ -1,4 +1,4 @@
-name: 01. Smoke testing
+name: smoke
 on:
   push:
     branches: [main, dev]
