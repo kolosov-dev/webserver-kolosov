@@ -17,10 +17,10 @@ jobs:
         run: echo ENV_DOMAIN_URL=${{ secrets.DEV_DOMAIN_URL }}  > .env
 
       - name: Make env var ENV_AUTH_SERVICE_URL
-        run: echo ENV_AUTH_SERVICE_URL=${{ secrets.DEV_AUTH_SERVICE_URL }}  >> .env
+        run: echo ENV_AUTH_SERVICE_URL="${{ secrets.DEV_AUTH_SERVICE_URL }}"  >> .env
 
       - name: Make env var ENV_SSL_SERT_ROOT
-        run: echo ENV_SSL_SERT_ROOT=${{ secrets.DEV_SSL_SERT_ROOT }}  >> .env
+        run: echo ENV_SSL_SERT_ROOT="${{ secrets.DEV_SSL_SERT_ROOT }}"  >> .env
 
       - name: Down auth container
         run: docker compose down
