@@ -1,7 +1,7 @@
 name: 02. Deploy to development
 on:
   workflow_run:
-    workflows: ["smoke"]
+    workflows: ["Smoke Testing"]
     branches: 
       - dev
     types: 
@@ -9,8 +9,9 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to DO
+    name: Deploy production to DO server
     if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    environment: development
     runs-on: self-hosted
     steps:
       - name: Checkout main branch

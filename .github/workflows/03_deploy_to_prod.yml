@@ -1,12 +1,18 @@
-name: 03. Deploy to development
+name: 03. Deploy to production
 on:
-  push:
-    branches: [main]
+  workflow_run:
+    workflows: ["Smoke Testing"]
+    branches: 
+      - main
+    types: 
+      - completed
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    name: Deploy production to DO server
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
     environment: production
+    runs-on: self-hosted
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v3
