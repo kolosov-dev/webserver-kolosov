@@ -20,10 +20,10 @@ server {
 
     server_name ${ENV_DOMAIN_URL};
 
-    ssl_certificate /home/github/keys/fullchain.pem;
-    ssl_certificate_key /home/github/keys/privkey.pem;
+    ssl_certificate ${ENV_SSL_SERT_ROOT}/fullchain.pem;
+    ssl_certificate_key ${ENV_SSL_SERT_ROOT}/privkey.pem;
     
     location / {
-    	proxy_pass http://172.17.0.1:8000/;
+    	proxy_pass ${ENV_AUTH_SERVICE_URL};
     }
 }
