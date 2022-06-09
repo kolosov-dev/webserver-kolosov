@@ -1,16 +1,22 @@
-name: 02. Deploy to development
+name: 01. CI\CD Development workflow
+
 on:
-  workflow_run:
-    workflows: ["Smoke Testing"]
-    branches: 
-      - dev
-    types: 
-      - completed
+  push:
+    branches: [dev]
 
 jobs:
+  test:
+  name: Testing NGINX server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+
+      - name: Path
+        run: pwd
+        
   deploy:
-    name: Deploy production to DO server
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    name: Deploy to development server
     environment: development
     runs-on: self-hosted
     steps:

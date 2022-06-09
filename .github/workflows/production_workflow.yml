@@ -1,16 +1,22 @@
-name: 03. Deploy to production
+name: 02. CI\CD Production workflow
+
 on:
-  workflow_run:
-    workflows: ["Smoke Testing"]
-    branches: 
-      - main
-    types: 
-      - completed
+  push:
+    branches: [main]
 
 jobs:
+  test:
+  name: Testing NGINX server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+
+      - name: Path
+        run: pwd
+        
   deploy:
-    name: Deploy production to DO server
-    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    name: Deploy to production server
     environment: production
     runs-on: self-hosted
     steps:
@@ -31,3 +37,4 @@ jobs:
 
       - name: Up auth container
         run: docker compose up -d
+
