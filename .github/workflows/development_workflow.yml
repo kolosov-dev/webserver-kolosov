@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-  name: Testing NGINX server
+    name: Testing NGINX server
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main branch
@@ -14,7 +14,7 @@ jobs:
 
       - name: Path
         run: pwd
-        
+
   deploy:
     name: Deploy to development server
     environment: development
