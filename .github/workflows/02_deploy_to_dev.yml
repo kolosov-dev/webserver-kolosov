@@ -1,7 +1,10 @@
 name: 02. Deploy to development
 on:
-  push:
+  workflow_run:
+    workflows: ["01. Smoke testing"]
     branches: [dev]
+    types: 
+      - completed
 
 jobs:
   deploy:
