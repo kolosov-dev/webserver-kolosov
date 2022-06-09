@@ -18,7 +18,7 @@ jobs:
   deploy:
     name: Deploy to development server
     environment: development
-    runs-on: self-hosted
+    runs-on: dev-kolosov
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v3
