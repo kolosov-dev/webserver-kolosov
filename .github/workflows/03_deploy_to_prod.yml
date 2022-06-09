@@ -1,0 +1,27 @@
+name: 03. Deploy to development
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    environment: production
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+
+      - name: Make env var ENV_DOMAIN_URL
+        run: echo ENV_DOMAIN_URL="${{ secrets.GITENV_DOMAIN_URL }}"  > .env
+
+      - name: Make env var ENV_AUTH_SERVICE_URL
+        run: echo ENV_AUTH_SERVICE_URL="${{ secrets.GITENV_AUTH_SERVICE_URL }}"  >> .env
+
+      - name: Make env var ENV_SSL_SERT_ROOT
+        run: echo ENV_SSL_SERT_ROOT="${{ secrets.GITENV_SSL_SERT_ROOT }}"  >> .env
+
+      - name: Down auth container
+        run: docker compose down
+
+      - name: Up auth container
+        run: docker compose up -d
