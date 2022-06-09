@@ -4,6 +4,8 @@ services:
   nginx:
     container_name: nginx
     image: nginx:latest
+    env_file:
+      - .env
     ports:
       - 80:80
       - 443:443
