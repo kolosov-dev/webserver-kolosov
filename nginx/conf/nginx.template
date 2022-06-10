@@ -23,7 +23,10 @@ server {
     ssl_certificate ${ENV_SSL_SERT_ROOT}/fullchain.pem;
     ssl_certificate_key ${ENV_SSL_SERT_ROOT}/privkey.pem;
     
-    location / {
+    location /auth/ {
     	proxy_pass ${ENV_AUTH_SERVICE_URL};
+    }
+    location / {
+    	proxy_pass ${ENV_DUMMY_HOMEPAGE_URL};
     }
 }
