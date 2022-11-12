@@ -14,7 +14,7 @@ services:
       - ./nginx/conf/:/etc/nginx/conf.d/:rw
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
-      - /home/github/keys/:/home/github/keys/
+      - /home/github_runner/keys/:/home/github_runner/keys/
     command: /bin/bash -c "envsubst < /etc/nginx/conf.d/nginx.template > /etc/nginx/conf.d/nginx.conf && nginx -g 'daemon off;'"
 
   certbot:
